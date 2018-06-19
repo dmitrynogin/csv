@@ -9,12 +9,13 @@ namespace MyProject.Users
     {
         protected override IEnumerable<FullName> Read(RowReader reader)
         {
-            while (reader.Read())
-                yield return new FullName
-                {
-                    First = reader.Get<string>("First"),
-                    Last = reader.Get<string>("Last")
-                };
+            using(reader)
+                while (reader.Read())
+                    yield return new FullName
+                    {
+                        First = reader.Get<string>("First"),
+                        Last = reader.Get<string>("Last")
+                    };
         }
     }
 }
